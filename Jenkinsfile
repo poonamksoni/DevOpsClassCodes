@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
 
     tools {
         
@@ -10,6 +10,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
+            agent {label 'Linux_slave'}
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/poonamksoni/DevOpsClassCodes.git'
@@ -17,6 +18,7 @@ pipeline {
             }
         }
         stage('Compile') {
+            agent any
             steps {
                 // Get some code from a GitHub repository
                 sh 'mvn compile'
@@ -24,6 +26,7 @@ pipeline {
             }
         }
         stage('Codereview') {
+            agent any
             steps {
                 // Get some code from a GitHub repository
                 sh 'mvn pmd:pmd'
@@ -31,6 +34,7 @@ pipeline {
             }
         }
         stage('UnitTest') {
+            agent any
             steps {
                 // Get some code from a GitHub repository
                 sh 'mvn test'
@@ -38,6 +42,7 @@ pipeline {
             }
         }
         stage('MetricCheck') {
+            agent any
             steps {
                 // Get some code from a GitHub repository
                 sh 'mvn cobertura:cobertura -Dcobertura.report.format=xml'
@@ -45,6 +50,7 @@ pipeline {
             }
         }
         stage('Package') {
+            agent any
             steps {
                 // Get some code from a GitHub repository
                 sh 'mvn package'
