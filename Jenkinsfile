@@ -10,7 +10,7 @@ pipeline {
 
     stages {
         stage('Checkout') {
-            agent {label 'Linux_slave'}
+            agent {label 'Linux_Slave'}
             steps {
                 // Get some code from a GitHub repository
                 git 'https://github.com/poonamksoni/DevOpsClassCodes.git'
